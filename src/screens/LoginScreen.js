@@ -1,4 +1,5 @@
 import React from "react";
+import { useState } from "react";
 import {
   SafeAreaView,
   View,
@@ -6,6 +7,7 @@ import {
   Image,
   TextInput,
   TouchableOpacity,
+  Alert,
 } from "react-native";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 
@@ -17,6 +19,37 @@ import InstagramImage from "../images/Instagram_logo_2016.svg.webp";
 import XImage from "../images/X-logo.jpg";
 
 const LoginScreen = ({ navigation }) => {
+  const [userName, setUserName] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleLogin = async () => {
+    try {
+      // API Request to login
+      const response = await fetch("http://10.0.2.2:4000/api/users/login", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ userName, password }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        // Login successful
+        console.log(data);
+        navigation.navigate("LandingScreen");
+      } else {
+        // Login failed
+        console.log(data);
+        Alert.alert("Login failed");
+      }
+    } catch (error) {
+      console.error("Error trying to log in: ", error);
+      Alert.alert("Error", "An unexpected error occurred. Please try again.");
+    }
+  };
+
   return (
     <SafeAreaView style={{ flex: 1, justifyContent: "center" }}>
       <View style={{ paddingHorizontal: 25 }}>
@@ -44,6 +77,8 @@ const LoginScreen = ({ navigation }) => {
               style={{ marginRight: 5 }}
             />
           }
+          value={userName}
+          onChangeText={setUserName}
         />
         <InputField
           label={"Password"}
@@ -56,11 +91,13 @@ const LoginScreen = ({ navigation }) => {
             />
           }
           inputType={"password"}
+          value={password}
+          onChangeText={setPassword}
           fieldButton={"Forgot?"}
           fieldButtonAction={() => {}}
         />
 
-        <CustomButton title={"Login"} onPress={() => {}} />
+        <CustomButton title={"Login"} onPress={handleLogin} />
 
         <Text style={{ textAlign: "center", color: "grey", marginBottom: 30 }}>
           Or login with ...

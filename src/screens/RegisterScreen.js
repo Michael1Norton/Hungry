@@ -1,4 +1,5 @@
 import React from "react";
+import { useState } from "react";
 import {
   SafeAreaView,
   View,
@@ -6,6 +7,7 @@ import {
   Image,
   TextInput,
   TouchableOpacity,
+  Alert,
 } from "react-native";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 
@@ -17,6 +19,84 @@ import InstagramImage from "../images/Instagram_logo_2016.svg.webp";
 import XImage from "../images/X-logo.jpg";
 
 const RegisterScreen = ({ navigation }) => {
+  const [userName, setUserName] = useState("");
+  const [email, setEmail] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+
+  const logSetUserName = (newUserName) => {
+    console.log("Setting username:", newUserName);
+    setUserName(newUserName);
+  };
+
+  const logSetEmail = (newEmail) => {
+    console.log("Setting email:", newEmail);
+    setEmail(newEmail);
+  };
+
+  const logSetPhoneNumber = (newPhoneNumber) => {
+    console.log("Setting phone number:", newPhoneNumber);
+    setPhoneNumber(newPhoneNumber);
+  };
+
+  const logSetPassword = (newPassword) => {
+    console.log("Setting password:", newPassword);
+    setPassword(newPassword);
+  };
+
+  const logSetConfirmPassword = (newConfirmPassword) => {
+    console.log("Setting confirm password:", newConfirmPassword);
+    setConfirmPassword(newConfirmPassword);
+  };
+
+  const handleRegister = async () => {
+    try {
+      console.log("Registering...");
+      // console.log("Username:", userName || "N/A");
+      // console.log("Email:", email || "N/A");
+      // console.log("Phone Number:", phoneNumber);
+      // console.log("Password:", password);
+      // console.log("Confirm Password:", confirmPassword);
+
+      // make sure passwords match
+      if (password !== confirmPassword) {
+        console.log("Passwords do not match");
+        Alert.alert("Passwords do not match. Please try again.");
+        return;
+      }
+
+      // API Request to register
+      const response = await fetch("http://10.0.2.2:4000/api/users/signup", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          userName,
+          email,
+          phoneNum: phoneNumber,
+          password,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        // Registration successful
+        console.log(data);
+        navigation.navigate("LoginScreen");
+      } else {
+        // Registration failed
+        console.log(data);
+        Alert.alert("Registration failed", data.message);
+      }
+    } catch (error) {
+      console.error("Error trying to register: ", error);
+      Alert.alert("Error", "An unexpected error occurred. Please try again.");
+    }
+  };
+
   return (
     <SafeAreaView style={{ flex: 1, justifyContent: "center" }}>
       <View style={{ paddingHorizontal: 25 }}>
@@ -92,6 +172,8 @@ const RegisterScreen = ({ navigation }) => {
               style={{ marginRight: 5 }}
             />
           }
+          value={userName}
+          onChangeText={logSetUserName}
         />
 
         <InputField
@@ -105,6 +187,8 @@ const RegisterScreen = ({ navigation }) => {
             />
           }
           keyboardType={"email-address"}
+          value={email}
+          onChangeText={logSetEmail}
         />
 
         <InputField
@@ -118,6 +202,8 @@ const RegisterScreen = ({ navigation }) => {
             />
           }
           keyboardType={"numeric"}
+          value={phoneNumber}
+          onChangeText={logSetPhoneNumber}
         />
 
         <InputField
@@ -131,6 +217,8 @@ const RegisterScreen = ({ navigation }) => {
             />
           }
           inputType={"password"}
+          value={password}
+          onChangeText={logSetPassword}
         />
 
         <InputField
@@ -144,9 +232,11 @@ const RegisterScreen = ({ navigation }) => {
             />
           }
           inputType={"password"}
+          value={confirmPassword}
+          onChangeText={logSetConfirmPassword}
         />
 
-        <CustomButton title={"Register"} onPress={() => {}} />
+        <CustomButton title={"Register"} onPress={handleRegister} />
 
         <View
           style={{

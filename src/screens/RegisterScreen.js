@@ -16,7 +16,7 @@ import GoogleImage from "../images/google.svg.png";
 import InstagramImage from "../images/Instagram_logo_2016.svg.webp";
 import XImage from "../images/X-logo.jpg";
 
-const LoginScreen = ({ navigation }) => {
+const RegisterScreen = ({ navigation }) => {
   return (
     <SafeAreaView style={{ flex: 1, justifyContent: "center" }}>
       <View style={{ paddingHorizontal: 25 }}>
@@ -31,41 +31,8 @@ const LoginScreen = ({ navigation }) => {
             marginBottom: 35,
           }}
         >
-          Login
+          Register
         </Text>
-
-        <InputField
-          label={"Username"}
-          icon={
-            <MaterialIcons
-              name="person"
-              size={24}
-              color="#120"
-              style={{ marginRight: 5 }}
-            />
-          }
-        />
-        <InputField
-          label={"Password"}
-          icon={
-            <MaterialIcons
-              name="password"
-              size={24}
-              color="#120"
-              style={{ marginRight: 5 }}
-            />
-          }
-          inputType={"password"}
-          fieldButton={"Forgot?"}
-          fieldButtonAction={() => {}}
-        />
-
-        <CustomButton title={"Login"} onPress={() => {}} />
-
-        <Text style={{ textAlign: "center", color: "grey", marginBottom: 30 }}>
-          Or login with ...
-        </Text>
-
         <View
           style={{
             flexDirection: "row",
@@ -111,21 +78,87 @@ const LoginScreen = ({ navigation }) => {
           </TouchableOpacity>
         </View>
 
+        <Text style={{ textAlign: "center", color: "grey", marginBottom: 30 }}>
+          Or Register With Email
+        </Text>
+
+        <InputField
+          label={"Username"}
+          icon={
+            <MaterialIcons
+              name="person"
+              size={24}
+              color="#120"
+              style={{ marginRight: 5 }}
+            />
+          }
+        />
+
+        <InputField
+          label={"Email Address"}
+          icon={
+            <MaterialIcons
+              name="alternate-email"
+              size={24}
+              color="#120"
+              style={{ marginRight: 5 }}
+            />
+          }
+          keyboardType={"email-address"}
+        />
+
+        <InputField
+          label={"Phone Number"}
+          icon={
+            <MaterialIcons
+              name="smartphone"
+              size={24}
+              color="#120"
+              style={{ marginRight: 5 }}
+            />
+          }
+          keyboardType={"numeric"}
+        />
+
+        <InputField
+          label={"Password"}
+          icon={
+            <MaterialIcons
+              name="password"
+              size={24}
+              color="#120"
+              style={{ marginRight: 5 }}
+            />
+          }
+          inputType={"password"}
+        />
+
+        <InputField
+          label={"Confirm Password"}
+          icon={
+            <MaterialIcons
+              name="password"
+              size={24}
+              color="#120"
+              style={{ marginRight: 5 }}
+            />
+          }
+          inputType={"password"}
+        />
+
+        <CustomButton title={"Register"} onPress={() => {}} />
+
         <View
           style={{
             flexDirection: "row",
             justifyContent: "center",
             marginBottom: 30,
-            marginTop: 10,
+            marginTop: 0,
           }}
         >
-          <Text>New to the app? </Text>
-          <TouchableOpacity
-            onPress={() => navigation.navigate("RegisterScreen")}
-          >
-            <Text style={{ color: "orange", fontWeight: "bold" }}>
-              Register
-            </Text>
+          <Text>Already Registered? </Text>
+          <TouchableOpacity onPress={() => navigation.goBack()}>
+            <Text style={{ color: "orange", fontWeight: "bold" }}>Login</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -133,4 +166,4 @@ const LoginScreen = ({ navigation }) => {
   );
 };
 
-export default LoginScreen;
+export default RegisterScreen;

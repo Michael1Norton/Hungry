@@ -25,39 +25,14 @@ const RegisterScreen = ({ navigation }) => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
-  const logSetUserName = (newUserName) => {
-    console.log("Setting username:", newUserName);
-    setUserName(newUserName);
-  };
-
-  const logSetEmail = (newEmail) => {
-    console.log("Setting email:", newEmail);
-    setEmail(newEmail);
-  };
-
-  const logSetPhoneNumber = (newPhoneNumber) => {
-    console.log("Setting phone number:", newPhoneNumber);
-    setPhoneNumber(newPhoneNumber);
-  };
-
-  const logSetPassword = (newPassword) => {
-    console.log("Setting password:", newPassword);
-    setPassword(newPassword);
-  };
-
-  const logSetConfirmPassword = (newConfirmPassword) => {
-    console.log("Setting confirm password:", newConfirmPassword);
-    setConfirmPassword(newConfirmPassword);
-  };
-
   const handleRegister = async () => {
     try {
       console.log("Registering...");
-      // console.log("Username:", userName || "N/A");
-      // console.log("Email:", email || "N/A");
-      // console.log("Phone Number:", phoneNumber);
-      // console.log("Password:", password);
-      // console.log("Confirm Password:", confirmPassword);
+      console.log("Username:", userName || "N/A");
+      console.log("Email:", email || "N/A");
+      console.log("Phone Number:", phoneNumber);
+      console.log("Password:", password);
+      console.log("Confirm Password:", confirmPassword);
 
       // make sure passwords match
       if (password !== confirmPassword) {
@@ -173,7 +148,7 @@ const RegisterScreen = ({ navigation }) => {
             />
           }
           value={userName}
-          onChangeText={logSetUserName}
+          onTextChange={setUserName}
         />
 
         <InputField
@@ -188,7 +163,7 @@ const RegisterScreen = ({ navigation }) => {
           }
           keyboardType={"email-address"}
           value={email}
-          onChangeText={logSetEmail}
+          onTextChange={setEmail}
         />
 
         <InputField
@@ -203,7 +178,7 @@ const RegisterScreen = ({ navigation }) => {
           }
           keyboardType={"numeric"}
           value={phoneNumber}
-          onChangeText={logSetPhoneNumber}
+          onTextChange={setPhoneNumber}
         />
 
         <InputField
@@ -218,7 +193,7 @@ const RegisterScreen = ({ navigation }) => {
           }
           inputType={"password"}
           value={password}
-          onChangeText={logSetPassword}
+          onTextChange={setPassword}
         />
 
         <InputField
@@ -233,7 +208,7 @@ const RegisterScreen = ({ navigation }) => {
           }
           inputType={"password"}
           value={confirmPassword}
-          onChangeText={logSetConfirmPassword}
+          onTextChange={setConfirmPassword}
         />
 
         <CustomButton title={"Register"} onPress={handleRegister} />

@@ -24,13 +24,18 @@ const LoginScreen = ({ navigation }) => {
 
   const handleLogin = async () => {
     try {
+      console.log("Logging in...");
+      console.log("Username:", userName || "N/A");
+      console.log("Password:", password);
+
+      console.log(JSON.stringify({ userName, password }));
       // API Request to login
       const response = await fetch("http://10.0.2.2:4000/api/users/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ userName, password }),
+        body: JSON.stringify({ username: userName, password }),
       });
 
       const data = await response.json();
@@ -78,7 +83,7 @@ const LoginScreen = ({ navigation }) => {
             />
           }
           value={userName}
-          onChangeText={setUserName}
+          onTextChange={setUserName}
         />
         <InputField
           label={"Password"}
@@ -92,7 +97,7 @@ const LoginScreen = ({ navigation }) => {
           }
           inputType={"password"}
           value={password}
-          onChangeText={setPassword}
+          onTextChange={setPassword}
           fieldButton={"Forgot?"}
           fieldButtonAction={() => {}}
         />

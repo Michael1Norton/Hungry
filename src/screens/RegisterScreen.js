@@ -48,7 +48,7 @@ const RegisterScreen = ({ navigation }) => {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          userName,
+          username: userName,
           email,
           phoneNum: phoneNumber,
           password,

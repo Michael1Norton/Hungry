@@ -1,10 +1,18 @@
 import React from "react";
-import { SafeAreaView, Text, StyleSheet } from "react-native";
+import { SafeAreaView, Text, StyleSheet, Button } from "react-native";
+import { AuthContext } from "../context/AuthContext";
 
 const LandingScreen = () => {
+  const { logout } = React.useContext(AuthContext);
+
+  const handleLogout = () => {
+    logout();
+  };
+
   return (
     <SafeAreaView style={styles.container}>
       <Text>Landing Screen :D</Text>
+      <Button title="Logout" onPress={handleLogout} />
     </SafeAreaView>
   );
 };

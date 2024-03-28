@@ -20,7 +20,7 @@ import XImage from "../images/X-logo.jpg";
 import { AuthContext } from "../context/AuthContext";
 
 const LoginScreen = ({ navigation }) => {
-  const { test } = useContext(AuthContext);
+  const { login } = useContext(AuthContext);
 
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
@@ -46,7 +46,9 @@ const LoginScreen = ({ navigation }) => {
       if (response.ok) {
         // Login successful
         console.log(data);
-        navigation.navigate("LandingScreen");
+        const { token } = data;
+        login(token);
+        //navigation.navigate("AppStack");
       } else {
         // Login failed
         console.log(data);

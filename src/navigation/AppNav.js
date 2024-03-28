@@ -1,0 +1,15 @@
+import React from "react";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+
+import AuthStack from "./AuthStack";
+
+const AppNav = () => {
+  return (
+    <NavigationContainer>
+      <AuthStack />
+    </NavigationContainer>
+  );
+};
+
+export default AppNav;

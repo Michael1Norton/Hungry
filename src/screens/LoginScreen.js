@@ -1,5 +1,5 @@
 import React from "react";
-import { useState } from "react";
+import { useState, useContext } from "react";
 import {
   SafeAreaView,
   View,
@@ -17,8 +17,11 @@ import LoginBackground from "../images/LoginBackground.jpg";
 import GoogleImage from "../images/google.svg.png";
 import InstagramImage from "../images/Instagram_logo_2016.svg.webp";
 import XImage from "../images/X-logo.jpg";
+import { AuthContext } from "../context/AuthContext";
 
 const LoginScreen = ({ navigation }) => {
+  const { test } = useContext(AuthContext);
+
   const [userName, setUserName] = useState("");
   const [password, setPassword] = useState("");
 

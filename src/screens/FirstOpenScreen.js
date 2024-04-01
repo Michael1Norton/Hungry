@@ -16,21 +16,43 @@ const FirstOpenScreen = () => {
   const navigation = useNavigation();
 
   return (
-    <SafeAreaView style={{ flex: 1, justifyContent: "center" }}>
-      <View style={{ paddingHorizontal: 25 }}>
-        <View style={{ alignItems: "center" }}>
-          <Image source={LoginBackground} style={{ width: 200, height: 200 }} />
-        </View>
-        <Text
+    <SafeAreaView
+      style={{
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: "beige",
+      }}
+    >
+      {/* Logo with colored rings */}
+      <View style={{ position: "relative", marginBottom: 50 }}>
+        <View
           style={{
-            fontSize: 28,
-            fontWeight: "bold",
-            color: "#120",
-            marginBottom: 35,
+            position: "absolute",
+            width: 150,
+            height: 150,
+            borderRadius: 75,
+            borderWidth: 10,
+            borderColor: "red", // Change color as needed
           }}
-        >
-          Are you Hungry?
-        </Text>
+        ></View>
+        <View
+          style={{
+            position: "absolute",
+            width: 120,
+            height: 120,
+            borderRadius: 60,
+            borderWidth: 10,
+            borderColor: "blue", // Change color as needed
+            marginTop: 15,
+            marginLeft: 15,
+          }}
+        ></View>
+        <Image
+          source={LoginBackground}
+          style={{ width: 100, height: 100 }}
+          resizeMode="contain"
+        />
       </View>
       <TouchableOpacity
         style={{
@@ -52,7 +74,7 @@ const FirstOpenScreen = () => {
             fontWeight: "bold",
           }}
         >
-          Let's Begin
+          Let's Eat!
         </Text>
         <MaterialIcons name="arrow-forward-ios" size={22} color="#fff" />
       </TouchableOpacity>

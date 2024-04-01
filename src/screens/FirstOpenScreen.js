@@ -24,35 +24,20 @@ const FirstOpenScreen = () => {
         backgroundColor: "beige",
       }}
     >
-      {/* Logo with colored rings */}
-      <View style={{ position: "relative", marginBottom: 50 }}>
-        <View
+      <View style={{ paddingHorizontal: 25 }}>
+        <View style={{ alignItems: "center" }}>
+          <Image source={LoginBackground} style={{ width: 200, height: 200 }} />
+        </View>
+        <Text
           style={{
-            position: "absolute",
-            width: 150,
-            height: 150,
-            borderRadius: 75,
-            borderWidth: 10,
-            borderColor: "red", // Change color as needed
+            fontSize: 28,
+            fontWeight: "bold",
+            color: "#120",
+            marginBottom: 35,
           }}
-        ></View>
-        <View
-          style={{
-            position: "absolute",
-            width: 120,
-            height: 120,
-            borderRadius: 60,
-            borderWidth: 10,
-            borderColor: "blue", // Change color as needed
-            marginTop: 15,
-            marginLeft: 15,
-          }}
-        ></View>
-        <Image
-          source={LoginBackground}
-          style={{ width: 100, height: 100 }}
-          resizeMode="contain"
-        />
+        >
+          Are you Hungry?
+        </Text>
       </View>
       <TouchableOpacity
         style={{

@@ -1,5 +1,6 @@
 import React from "react";
 import { View, Text, ScrollView, Image, TextInput } from "react-native";
+import { useState, useEffect } from "react";
 import { StatusBar } from "expo-status-bar";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import Categories from "../components/Categories";
@@ -9,6 +10,31 @@ import {
 } from "react-native-responsive-screen";
 
 const HomeScreen = () => {
+  const [activeCategory, setActiveCategory] = useState("Beef");
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    getCategory();
+  }, []);
+
+  {
+    /* Get categories from the mealdb api */
+  }
+  const getCategory = async () => {
+    try {
+      const response = await fetch(
+        "https://www.themealdb.com/api/json/v1/1/categories.php"
+      );
+      const data = await response.json();
+      //console.log(data);
+      if (response.ok) {
+        setCategories(data.categories);
+      }
+    } catch (error) {
+      console.error("Error getting categories: ", error);
+    }
+  };
+
   return (
     <View className="flex-1 bg-white">
       <StatusBar style="dark" />
@@ -74,7 +100,11 @@ const HomeScreen = () => {
 
         {/* Categories */}
         <View>
-          <Categories />
+          <Categories
+            categories={categories}
+            activeCategory={activeCategory}
+            setActiveCategory={setActiveCategory}
+          />
         </View>
       </ScrollView>
     </View>

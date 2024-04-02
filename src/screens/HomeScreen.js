@@ -1,7 +1,8 @@
 import React from "react";
 import { View, Text, ScrollView, Image, TextInput } from "react-native";
 import { StatusBar } from "expo-status-bar";
-import MaterialIcons from "react-native-vector-icons/MaterialIcons"; // Import MaterialIcons
+import MaterialIcons from "react-native-vector-icons/MaterialIcons";
+import Categories from "../components/Categories";
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -72,7 +73,9 @@ const HomeScreen = () => {
         </View>
 
         {/* Categories */}
-        <View></View>
+        <View>
+          <Categories />
+        </View>
       </ScrollView>
     </View>
   );

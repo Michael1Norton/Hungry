@@ -1,16 +1,9 @@
-import React, { useEffect } from "react";
-import {
-  SafeAreaView,
-  View,
-  Text,
-  Image,
-  TouchableOpacity,
-  Animated,
-} from "react-native";
+import React from "react";
+import { useEffect } from "react";
+import { View, Text, Image, TouchableOpacity } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-
-import MaterialIcons from "react-native-vector-icons/MaterialIcons";
-import LoginBackground from "../images/1.png";
+import { StatusBar } from "expo-status-bar";
+import Animated, { useSharedValue, withSpring } from "react-native-reanimated";
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -19,75 +12,68 @@ import {
 const FirstOpenScreen = () => {
   const navigation = useNavigation();
 
-  const logoScale = new Animated.Value(0); // Initial scale for logo
+  const ring2Padding = useSharedValue(0);
+  const ring3Padding = useSharedValue(0);
+  const ring4Padding = useSharedValue(0);
 
   useEffect(() => {
-    startAnimations(); // Start animations when the screen mounts
-  }, []); // Empty dependency array ensures this effect runs only once after initial render
+    ring2Padding.value = 0;
+    ring3Padding.value = 0;
+    ring4Padding.value = 0;
 
-  const startAnimations = () => {
-    Animated.parallel([
-      // Logo animation
-      Animated.timing(logoScale, {
-        toValue: 1, // Final scale
-        duration: 2500, // Duration of the animation
-        useNativeDriver: true, // Enable native driver for performance
-      }),
-    ]).start(); // Start both animations
-  };
+    setTimeout(
+      () => (ring2Padding.value = withSpring(ring2Padding.value + hp(5))),
+      100
+    );
+    setTimeout(
+      () => (ring3Padding.value = withSpring(ring3Padding.value + hp(5))),
+      200
+    );
+    setTimeout(
+      () => (ring4Padding.value = withSpring(ring4Padding.value + hp(6))),
+      300
+    );
+  }, []);
 
   return (
-    <SafeAreaView
-      style={{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-        backgroundColor: "crimson",
-        paddingBottom: hp(5),
-      }}
-    >
-      <View style={{ justifyContent: "center", alignItems: "center" }}>
-        <Animated.View
-          style={{
-            transform: [{ scale: logoScale }], // Apply scale animation
-            backgroundColor: "ivory",
-            borderRadius: 9999,
-            padding: 5,
-            marginBottom: hp(20),
-          }}
-        >
-          <Image
-            source={LoginBackground}
-            style={{ width: hp(40), height: hp(40), borderRadius: 90 }}
-          />
-        </Animated.View>
-      </View>
-      <TouchableOpacity
-        style={{
-          backgroundColor: "ivory",
-          padding: 20,
-          width: "90%",
-          borderRadius: 10,
-          marginBottom: -85,
-          flexDirection: "row",
-          justifyContent: "center",
-        }}
-        onPress={() => navigation.navigate("LoginScreen")}
+    <View className="flex-1 justify-center items-center space-y-10 bg-amber-500">
+      <Image
+        source={require("../images/background.png")}
+        style={{ position: "absolute", width: wp(100), height: hp(100) }}
+      />
+      <StatusBar style="light" />
+      {/*Inserting logo with 4 rings which will be minimalistic and animated*/}
+      <Animated.View
+        className="bg-white/20 rounded-full"
+        style={{ padding: ring4Padding }}
       >
-        <Text
-          style={{
-            color: "crimson",
-            fontSize: hp(2.5),
-            textAlign: "center",
-            justifyContent: "center",
-            fontWeight: "bold",
-          }}
+        <Animated.View
+          className="bg-white/40 rounded-full"
+          style={{ padding: ring3Padding }}
         >
-          Let's Eat!
-        </Text>
-        <MaterialIcons name="arrow-forward-ios" size={22} color="#fff" />
+          <Animated.View
+            className="bg-white/60 rounded-full"
+            style={{ padding: ring2Padding }}
+          >
+            <Animated.View
+              className="bg-white/80 rounded-full"
+              style={{ padding: hp(0) }}
+            >
+              <Image
+                source={require("../images/1.png")}
+                style={{ width: hp(40), height: hp(40) }}
+              />
+            </Animated.View>
+          </Animated.View>
+        </Animated.View>
+      </Animated.View>
+
+      <TouchableOpacity onPress={() => navigation.navigate("LoginScreen")}>
+        <View className="bg-amber-800 rounded-full p-4 flex items-center justify-center">
+          <Text className="font-bold text-white text-lg">Lets Eat! </Text>
+        </View>
       </TouchableOpacity>
-    </SafeAreaView>
+    </View>
   );
 };
 

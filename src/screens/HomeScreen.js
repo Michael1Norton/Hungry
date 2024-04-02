@@ -56,6 +56,15 @@ const HomeScreen = () => {
     }
   };
 
+  {
+    /* Handles switching category so it updates masonrylist */
+  }
+  const changeCategory = (category) => {
+    getRecipes(category);
+    setActiveCategory(category);
+    setRecipes([]);
+  };
+
   return (
     <View className="flex-1 bg-white">
       <StatusBar style="dark" />
@@ -125,7 +134,7 @@ const HomeScreen = () => {
             <Categories
               categories={categories}
               activeCategory={activeCategory}
-              setActiveCategory={setActiveCategory}
+              changeCategory={changeCategory}
             />
           )}
         </View>

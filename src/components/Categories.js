@@ -9,7 +9,7 @@ import Animated, { FadeInUp } from "react-native-reanimated";
 export default function Categories({
   categories,
   activeCategory,
-  setActiveCategory,
+  changeCategory,
 }) {
   return (
     <Animated.View entering={FadeInUp.duration(500).springify()}>
@@ -25,7 +25,7 @@ export default function Categories({
           return (
             <TouchableOpacity
               key={index}
-              onPress={() => setActiveCategory(category.strCategory)}
+              onPress={() => changeCategory(category.strCategory)}
               className="flex item-center space-y-1"
             >
               <View className={"rounded-full p-[6px] " + activeButtonClass}>

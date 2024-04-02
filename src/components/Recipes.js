@@ -7,6 +7,7 @@ import {
 } from "react-native-responsive-screen";
 import MasonryList from "@react-native-seoul/masonry-list";
 import Animated, { FadeInDown } from "react-native-reanimated";
+import InnerLoading from "./InnerLoading";
 
 export default function Recipes({ categories, recipes }) {
   return (
@@ -18,7 +19,9 @@ export default function Recipes({ categories, recipes }) {
         Recipes
       </Text>
       <View>
-        {categories.length == 0 || recipes.length == 0 ? null : (
+        {categories.length == 0 || recipes.length == 0 ? (
+          <InnerLoading size="large" className="mt-20" />
+        ) : (
           <MasonryList
             data={recipes}
             keyExtractor={(item) => item.idMeal}

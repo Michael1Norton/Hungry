@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { StatusBar } from "expo-status-bar";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import Categories from "../components/Categories";
+import Recipes from "../components/Recipes";
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -12,9 +13,11 @@ import {
 const HomeScreen = () => {
   const [activeCategory, setActiveCategory] = useState("Beef");
   const [categories, setCategories] = useState([]);
+  const [recipes, setRecipes] = useState([]);
 
   useEffect(() => {
     getCategory();
+    getRecipes();
   }, []);
 
   {
@@ -29,6 +32,24 @@ const HomeScreen = () => {
       //console.log(data);
       if (response.ok) {
         setCategories(data.categories);
+      }
+    } catch (error) {
+      console.error("Error getting categories: ", error);
+    }
+  };
+
+  {
+    /* Get Recipes from the mealdb api */
+  }
+  const getRecipes = async (category = "Beef") => {
+    try {
+      const response = await fetch(
+        `https://www.themealdb.com/api/json/v1/1/filter.php?c=${category}`
+      );
+      const data = await response.json();
+      //console.log(data);
+      if (response.ok) {
+        setRecipes(data.meals);
       }
     } catch (error) {
       console.error("Error getting categories: ", error);
@@ -100,11 +121,18 @@ const HomeScreen = () => {
 
         {/* Categories */}
         <View>
-          <Categories
-            categories={categories}
-            activeCategory={activeCategory}
-            setActiveCategory={setActiveCategory}
-          />
+          {categories.length > 0 && (
+            <Categories
+              categories={categories}
+              activeCategory={activeCategory}
+              setActiveCategory={setActiveCategory}
+            />
+          )}
+        </View>
+
+        {/* Recipes */}
+        <View>
+          <Recipes recipes={recipes} categories={categories} />
         </View>
       </ScrollView>
     </View>

@@ -10,13 +10,13 @@ import {
   Alert,
 } from "react-native";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
-
+import appIcon from "../images/icon-192.png";
 import CustomButton from "../components/CustomButton";
 import InputField from "../components/inputField";
-import LoginBackground from "../images/LoginBackground.jpg";
-import GoogleImage from "../images/google.svg.png";
-import InstagramImage from "../images/Instagram_logo_2016.svg.webp";
-import XImage from "../images/X-logo.jpg";
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from "react-native-responsive-screen";
 
 const RegisterScreen = ({ navigation }) => {
   const [userName, setUserName] = useState("");
@@ -73,143 +73,162 @@ const RegisterScreen = ({ navigation }) => {
   };
 
   return (
-    <SafeAreaView style={{ flex: 1, justifyContent: "center" }}>
-      <View style={{ paddingHorizontal: 25 }}>
-        <View style={{ alignItems: "center" }}>
-          <Image source={LoginBackground} style={{ width: 200, height: 200 }} />
-        </View>
+    <SafeAreaView
+      style={{
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: "#FEECE2",
+      }}
+    >
+      <View style={{ paddingTop: 0, paddingBottom: hp(2) }}>
+        <Image source={appIcon} style={{ width: hp(22), height: hp(22) }} />
+      </View>
+      <View style={{ justifyContent: "center", alignItems: "center" }}>
         <Text
           style={{
-            fontSize: 28,
+            fontSize: hp(3),
             fontWeight: "bold",
-            color: "#120",
-            marginBottom: 35,
+            color: "black",
+            marginBottom: hp(1.5),
           }}
         >
-          Register
+          Create Your Account
         </Text>
+        <Text
+          style={{
+            fontSize: hp(2),
+            fontWeight: "bold",
+            color: "grey",
+            marginBottom: hp(2),
+          }}
+        >
+          Find your favorite recipes from around the world!
+        </Text>
+
         <View
           style={{
-            flexDirection: "row",
-            justifyContent: "space-between",
-            marginBottom: 10,
+            backgroundColor: "#FFF",
+            padding: hp(0.8),
+            borderRadius: 15,
+            marginBottom: hp(0.8),
+            width: wp(90),
           }}
         >
-          <TouchableOpacity
-            onPress={() => {}}
-            style={{
-              borderColor: "#ddd",
-              borderWidth: 2,
-              borderRadius: 10,
-              paddingHorizontal: 30,
-              paddingVertical: 10,
-            }}
-          >
-            <Image source={GoogleImage} style={{ width: 30, height: 30 }} />
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => {}}
-            style={{
-              borderColor: "#ddd",
-              borderWidth: 2,
-              borderRadius: 10,
-              paddingHorizontal: 30,
-              paddingVertical: 10,
-            }}
-          >
-            <Image source={XImage} style={{ width: 30, height: 30 }} />
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => {}}
-            style={{
-              borderColor: "#ddd",
-              borderWidth: 2,
-              borderRadius: 10,
-              paddingHorizontal: 30,
-              paddingVertical: 10,
-            }}
-          >
-            <Image source={InstagramImage} style={{ width: 30, height: 30 }} />
-          </TouchableOpacity>
+          <InputField
+            label={"Username"}
+            icon={
+              <MaterialIcons
+                name="person"
+                size={24}
+                color="#120"
+                style={{ marginRight: 5 }}
+              />
+            }
+            value={userName}
+            onTextChange={setUserName}
+          />
         </View>
 
-        <Text style={{ textAlign: "center", color: "grey", marginBottom: 30 }}>
-          Or Register With Email
-        </Text>
+        <View
+          style={{
+            backgroundColor: "#FFF",
+            padding: hp(0.8),
+            borderRadius: 15,
+            marginBottom: hp(0.8),
+            width: wp(90),
+          }}
+        >
+          <InputField
+            label={"Email Address"}
+            icon={
+              <MaterialIcons
+                name="alternate-email"
+                size={24}
+                color="#120"
+                style={{ marginRight: 5 }}
+              />
+            }
+            keyboardType={"email-address"}
+            value={email}
+            onTextChange={setEmail}
+          />
+        </View>
 
-        <InputField
-          label={"Username"}
-          icon={
-            <MaterialIcons
-              name="person"
-              size={24}
-              color="#120"
-              style={{ marginRight: 5 }}
-            />
-          }
-          value={userName}
-          onTextChange={setUserName}
-        />
+        <View
+          style={{
+            backgroundColor: "#FFF",
+            padding: hp(0.8),
+            borderRadius: 15,
+            marginBottom: hp(0.8),
+            width: wp(90),
+          }}
+        >
+          <InputField
+            label={"Phone Number"}
+            icon={
+              <MaterialIcons
+                name="smartphone"
+                size={24}
+                color="#120"
+                style={{ marginRight: 5 }}
+              />
+            }
+            keyboardType={"numeric"}
+            value={phoneNumber}
+            onTextChange={setPhoneNumber}
+          />
+        </View>
 
-        <InputField
-          label={"Email Address"}
-          icon={
-            <MaterialIcons
-              name="alternate-email"
-              size={24}
-              color="#120"
-              style={{ marginRight: 5 }}
-            />
-          }
-          keyboardType={"email-address"}
-          value={email}
-          onTextChange={setEmail}
-        />
+        <View
+          style={{
+            backgroundColor: "#FFF",
+            padding: hp(0.8),
+            borderRadius: 15,
+            marginBottom: hp(0.8),
+            width: wp(90),
+          }}
+        >
+          <InputField
+            label={"Password"}
+            icon={
+              <MaterialIcons
+                name="password"
+                size={24}
+                color="#120"
+                style={{ marginRight: 5 }}
+              />
+            }
+            inputType={"password"}
+            value={password}
+            onTextChange={setPassword}
+          />
+        </View>
 
-        <InputField
-          label={"Phone Number"}
-          icon={
-            <MaterialIcons
-              name="smartphone"
-              size={24}
-              color="#120"
-              style={{ marginRight: 5 }}
-            />
-          }
-          keyboardType={"numeric"}
-          value={phoneNumber}
-          onTextChange={setPhoneNumber}
-        />
-
-        <InputField
-          label={"Password"}
-          icon={
-            <MaterialIcons
-              name="password"
-              size={24}
-              color="#120"
-              style={{ marginRight: 5 }}
-            />
-          }
-          inputType={"password"}
-          value={password}
-          onTextChange={setPassword}
-        />
-
-        <InputField
-          label={"Confirm Password"}
-          icon={
-            <MaterialIcons
-              name="password"
-              size={24}
-              color="#120"
-              style={{ marginRight: 5 }}
-            />
-          }
-          inputType={"password"}
-          value={confirmPassword}
-          onTextChange={setConfirmPassword}
-        />
+        <View
+          style={{
+            backgroundColor: "#FFF",
+            padding: hp(0.8),
+            borderRadius: 15,
+            marginBottom: hp(0.8),
+            width: wp(90),
+          }}
+        >
+          <InputField
+            label={"Confirm Password"}
+            icon={
+              <MaterialIcons
+                name="password"
+                size={24}
+                color="#120"
+                style={{ marginRight: 5 }}
+              />
+            }
+            inputType={"password"}
+            value={confirmPassword}
+            onTextChange={setConfirmPassword}
+          />
+        </View>
 
         <CustomButton title={"Register"} onPress={handleRegister} />
 
@@ -222,8 +241,11 @@ const RegisterScreen = ({ navigation }) => {
           }}
         >
           <Text>Already Registered? </Text>
-          <TouchableOpacity onPress={() => navigation.goBack()}>
-            <Text style={{ color: "orange", fontWeight: "bold" }}>Login</Text>
+          <TouchableOpacity
+            style={{ borderBottomWidth: 1, borderBottomColor: "#6B240C" }}
+            onPress={() => navigation.goBack()}
+          >
+            <Text style={{ color: "#6B240C", fontWeight: "bold" }}>Login</Text>
           </TouchableOpacity>
         </View>
       </View>

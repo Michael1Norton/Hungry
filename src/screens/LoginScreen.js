@@ -10,14 +10,14 @@ import {
   Alert,
 } from "react-native";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
-
+import appIcon from "../images/icon-192.png";
 import CustomButton from "../components/CustomButton";
 import InputField from "../components/inputField";
-import LoginBackground from "../images/LoginBackground.jpg";
-import GoogleImage from "../images/google.svg.png";
-import InstagramImage from "../images/Instagram_logo_2016.svg.webp";
-import XImage from "../images/X-logo.jpg";
 import { AuthContext } from "../context/AuthContext";
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from "react-native-responsive-screen";
 
 const LoginScreen = ({ navigation }) => {
   const { login } = useContext(AuthContext);
@@ -61,99 +61,90 @@ const LoginScreen = ({ navigation }) => {
   };
 
   return (
-    <SafeAreaView style={{ flex: 1, justifyContent: "center" }}>
-      <View style={{ paddingHorizontal: 25 }}>
+    <SafeAreaView
+      style={{
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: "#FEECE2",
+      }}
+    >
+      <View style={{ paddingTop: 0, paddingBottom: hp(5) }}>
+        <Image source={appIcon} style={{ width: hp(22), height: hp(22) }} />
+      </View>
+      <View style={{ justifyContent: "center", alignItems: "center" }}>
         <Text
           style={{
-            fontSize: 28,
+            fontSize: hp(3),
             fontWeight: "bold",
-            color: "#120",
+            color: "black",
+            marginBottom: hp(1.5),
+          }}
+        >
+          Sign Into Culinary Canvas
+        </Text>
+        <Text
+          style={{
+            fontSize: hp(2),
+            fontWeight: "bold",
+            color: "grey",
             marginBottom: 35,
           }}
         >
-          Login
-        </Text>
-
-        <InputField
-          label={"Username"}
-          icon={
-            <MaterialIcons
-              name="person"
-              size={24}
-              color="#120"
-              style={{ marginRight: 5 }}
-            />
-          }
-          value={userName}
-          onTextChange={setUserName}
-        />
-        <InputField
-          label={"Password"}
-          icon={
-            <MaterialIcons
-              name="password"
-              size={24}
-              color="#120"
-              style={{ marginRight: 5 }}
-            />
-          }
-          inputType={"password"}
-          value={password}
-          onTextChange={setPassword}
-          fieldButton={"Forgot?"}
-          fieldButtonAction={() => {}}
-        />
-
-        <CustomButton title={"Login"} onPress={handleLogin} />
-
-        <Text style={{ textAlign: "center", color: "grey", marginBottom: 30 }}>
-          Or login with ...
+          Get access to your favorite recipes and more!
         </Text>
 
         <View
           style={{
-            flexDirection: "row",
-            justifyContent: "space-between",
-            marginBottom: 10,
+            backgroundColor: "#FFF",
+            padding: hp(0.8),
+            borderRadius: 15,
+            marginBottom: hp(2.3),
+            width: wp(90),
           }}
         >
-          <TouchableOpacity
-            onPress={() => {}}
-            style={{
-              borderColor: "#ddd",
-              borderWidth: 2,
-              borderRadius: 10,
-              paddingHorizontal: 30,
-              paddingVertical: 10,
-            }}
-          >
-            <Image source={GoogleImage} style={{ width: 30, height: 30 }} />
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => {}}
-            style={{
-              borderColor: "#ddd",
-              borderWidth: 2,
-              borderRadius: 10,
-              paddingHorizontal: 30,
-              paddingVertical: 10,
-            }}
-          >
-            <Image source={XImage} style={{ width: 30, height: 30 }} />
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => {}}
-            style={{
-              borderColor: "#ddd",
-              borderWidth: 2,
-              borderRadius: 10,
-              paddingHorizontal: 30,
-              paddingVertical: 10,
-            }}
-          >
-            <Image source={InstagramImage} style={{ width: 30, height: 30 }} />
-          </TouchableOpacity>
+          <InputField
+            label={"Username"}
+            icon={
+              <MaterialIcons
+                name="person"
+                size={24}
+                color="#120"
+                style={{ marginRight: hp(1) }}
+              />
+            }
+            value={userName}
+            onTextChange={setUserName}
+          />
         </View>
+        <View
+          style={{
+            backgroundColor: "#FFF",
+            padding: hp(0.8),
+            borderRadius: 15,
+            marginBottom: hp(1.5),
+            width: wp(90),
+          }}
+        >
+          <InputField
+            label={"Password"}
+            icon={
+              <MaterialIcons
+                name="password"
+                size={24}
+                color="#120"
+                style={{ marginRight: hp(1) }}
+              />
+            }
+            inputType={"password"}
+            value={password}
+            onTextChange={setPassword}
+            fieldButton={"Forgot?"}
+            fieldButtonAction={() => {}}
+          />
+        </View>
+
+        <CustomButton title={"Sign In"} onPress={handleLogin} />
 
         <View
           style={{
@@ -166,8 +157,9 @@ const LoginScreen = ({ navigation }) => {
           <Text>New to the app? </Text>
           <TouchableOpacity
             onPress={() => navigation.navigate("RegisterScreen")}
+            style={{ borderBottomWidth: 1, borderBottomColor: "#6B240C" }}
           >
-            <Text style={{ color: "orange", fontWeight: "bold" }}>
+            <Text style={{ color: "#6B240C", fontWeight: "bold" }}>
               Register
             </Text>
           </TouchableOpacity>

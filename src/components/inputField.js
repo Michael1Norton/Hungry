@@ -6,6 +6,10 @@ import {
   TextInput,
   onChangeText,
 } from "react-native";
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from "react-native-responsive-screen";
 
 export default function InputField({
   label,
@@ -22,8 +26,8 @@ export default function InputField({
         flexDirection: "row",
         borderBottomColor: "#ccc",
         borderBottomWidth: 2,
-        paddingBottom: 8,
-        marginBottom: 20,
+        paddingBottom: hp(0.2),
+        marginBottom: hp(0.2),
       }}
     >
       {icon}
@@ -37,7 +41,7 @@ export default function InputField({
       />
 
       <TouchableOpacity onPress={fieldButtonAction}>
-        <Text style={{ color: "orange", fontWeight: "bold" }}>
+        <Text style={{ color: "#6B240C", fontWeight: "bold" }}>
           {fieldButton}
         </Text>
       </TouchableOpacity>

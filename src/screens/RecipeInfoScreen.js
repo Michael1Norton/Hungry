@@ -118,7 +118,7 @@ const RecipeInfoScreen = (props) => {
       {isLoading ? (
         <InnerLoading size="large" className="mt-20" />
       ) : (
-        <View className="px-4 flex justify-between space-y-4 pt-8">
+        <View className="px-4 flex justify-between space-y-2 pt-8">
           <View className="space-y-2">
             <Text
               style={{ fontSize: hp(3) }}
@@ -128,122 +128,14 @@ const RecipeInfoScreen = (props) => {
             </Text>
             <Text
               style={{ fontSize: hp(2) }}
-              className="font-medium flex-1 text-neutral-500"
+              className="font-medium flex-1 text-amber-500"
             >
+              <Text className="text-neutral-500">Region: </Text>
               {meal?.strArea}
             </Text>
           </View>
 
-          <View className="flex-row justify-around">
-            <View className="flex rounded-full bg-amber-300 p-2">
-              <View
-                style={{ height: hp(6.5), width: hp(6.5) }}
-                className="bg-white rounded-full flex items-center justify-center"
-              >
-                <MaterialIcons
-                  name="alarm"
-                  size={hp(4)}
-                  color="gray"
-                  style={{ marginRight: 10, marginLeft: 10 }}
-                />
-              </View>
-              <View className="flex items-center py-2 space-y-1">
-                <Text
-                  style={{ fontSize: hp(2) }}
-                  className="font-bold text-neutral-700"
-                >
-                  35
-                </Text>
-                <Text
-                  style={{ fontSize: hp(1.3) }}
-                  className="font-bold text-neutral-700"
-                >
-                  Mins
-                </Text>
-              </View>
-            </View>
-            <View className="flex rounded-full bg-amber-300 p-2">
-              <View
-                style={{ height: hp(6.5), width: hp(6.5) }}
-                className="bg-white rounded-full flex items-center justify-center"
-              >
-                <MaterialIcons
-                  name="takeout-dining"
-                  size={hp(4)}
-                  color="gray"
-                  style={{ marginRight: 10, marginLeft: 10 }}
-                />
-              </View>
-              <View className="flex items-center py-2 space-y-1">
-                <Text
-                  style={{ fontSize: hp(2) }}
-                  className="font-bold text-neutral-700"
-                >
-                  03
-                </Text>
-                <Text
-                  style={{ fontSize: hp(1.3) }}
-                  className="font-bold text-neutral-700"
-                >
-                  Servings
-                </Text>
-              </View>
-            </View>
-            <View className="flex rounded-full bg-amber-300 p-2">
-              <View
-                style={{ height: hp(6.5), width: hp(6.5) }}
-                className="bg-white rounded-full flex items-center justify-center"
-              >
-                <MaterialIcons
-                  name="local-fire-department"
-                  size={hp(4)}
-                  color="gray"
-                  style={{ marginRight: 10, marginLeft: 10 }}
-                />
-              </View>
-              <View className="flex items-center py-2 space-y-1">
-                <Text
-                  style={{ fontSize: hp(2) }}
-                  className="font-bold text-neutral-700"
-                >
-                  1500
-                </Text>
-                <Text
-                  style={{ fontSize: hp(1.3) }}
-                  className="font-bold text-neutral-700"
-                >
-                  Calories
-                </Text>
-              </View>
-            </View>
-            <View className="flex rounded-full bg-amber-300 p-2">
-              <View
-                style={{ height: hp(6.5), width: hp(6.5) }}
-                className="bg-white rounded-full flex items-center justify-center"
-              >
-                <MaterialIcons
-                  name="local-dining"
-                  size={hp(4)}
-                  color="gray"
-                  style={{ marginRight: 10, marginLeft: 10 }}
-                />
-              </View>
-              <View className="flex items-center py-2 space-y-1">
-                <Text
-                  style={{ fontSize: hp(2) }}
-                  className="font-bold text-neutral-700"
-                >
-                  Easy
-                </Text>
-                <Text
-                  style={{ fontSize: hp(1.3) }}
-                  className="font-bold text-neutral-700"
-                >
-                  Calories
-                </Text>
-              </View>
-            </View>
-          </View>
+          <View className="flex-row justify-around"></View>
           {/* Ingredients */}
           <View className="space-y-4">
             <Text
@@ -280,7 +172,7 @@ const RecipeInfoScreen = (props) => {
             </View>
           </View>
           {/* Instructions */}
-          <View className="space-y-4">
+          <View className="space-y-2">
             <Text
               style={{ fontSize: hp(2) }}
               className="font-bold flex-1 text-neutral-700"

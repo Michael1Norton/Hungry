@@ -14,11 +14,18 @@ const HomeScreen = () => {
   const [activeCategory, setActiveCategory] = useState("Beef");
   const [categories, setCategories] = useState([]);
   const [recipes, setRecipes] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
     getCategory();
     getRecipes();
   }, []);
+
+  useEffect(() => {
+    if (searchQuery.trim() !== "") {
+      searchRecipesByName();
+    }
+  }, [searchQuery]);
 
   {
     /* Get categories from the mealdb api */
@@ -65,13 +72,27 @@ const HomeScreen = () => {
     setRecipes([]);
   };
 
+  const searchRecipesByName = async () => {
+    try {
+      const response = await fetch(
+        `https://www.themealdb.com/api/json/v1/1/search.php?s=${searchQuery}`
+      );
+      const data = await response.json();
+      if (response.ok) {
+        setRecipes(data.meals);
+      }
+    } catch (error) {
+      console.error("Error searching recipes: ", error);
+    }
+  };
+
   return (
     <View className="flex-1 bg-white">
       <StatusBar style="dark" />
       <ScrollView
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{ paddingBottom: 50, paddingTop: hp(3) }}
-        className="space-y-6 pt-15"
+        className="space-y-2 pt-15"
       >
         {/* Inserting the user icon */}
         <View className="mx-4 flex-row justify-between items-center mb-2">
@@ -125,6 +146,8 @@ const HomeScreen = () => {
             placeholderTextColor={"gray"}
             style={{ fontSize: hp(2), flex: 1 }}
             className="text-base mb-1 pl-3 tracking-wider"
+            onChangeText={setSearchQuery}
+            value={searchQuery}
           />
         </View>
 

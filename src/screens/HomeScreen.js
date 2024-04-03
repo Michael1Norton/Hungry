@@ -1,5 +1,12 @@
 import React from "react";
-import { View, Text, ScrollView, Image, TextInput } from "react-native";
+import {
+  View,
+  Text,
+  ScrollView,
+  Image,
+  TextInput,
+  TouchableOpacity,
+} from "react-native";
 import { useState, useEffect } from "react";
 import { StatusBar } from "expo-status-bar";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
@@ -9,12 +16,15 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
+import { useNavigation } from "@react-navigation/native";
+import { UserProfileScreen } from "./UserProfileScreen";
 
 const HomeScreen = () => {
   const [activeCategory, setActiveCategory] = useState("Beef");
   const [categories, setCategories] = useState([]);
   const [recipes, setRecipes] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
+  const navigation = useNavigation();
 
   useEffect(() => {
     getCategory();
@@ -95,18 +105,22 @@ const HomeScreen = () => {
         className="space-y-2 pt-15"
       >
         {/* Inserting the user icon */}
-        <View className="mx-4 flex-row justify-between items-center mb-2">
-          <Image
-            source={require("../images/profilePic.png")}
-            style={{ height: hp(6), width: hp(5), borderRadius: hp(5) }}
-          />
-          <MaterialIcons
-            name="notifications"
-            size={hp(4)}
-            color="black"
-            style={{ marginRight: 10 }}
-          />
-        </View>
+        <TouchableOpacity
+          onPress={() => navigation.navigate("UserProfileScreen")}
+        >
+          <View className="mx-4 flex-row justify-between items-center mb-2">
+            <Image
+              source={require("../images/profilePic.png")}
+              style={{ height: hp(6), width: hp(5), borderRadius: hp(5) }}
+            />
+            <MaterialIcons
+              name="notifications"
+              size={hp(4)}
+              color="black"
+              style={{ marginRight: 10 }}
+            />
+          </View>
+        </TouchableOpacity>
 
         {/* Welcome Back */}
         <View className="mx-4 space-y-2 mb-2">

@@ -9,8 +9,10 @@ import MasonryList from "@react-native-seoul/masonry-list";
 import Animated, { FadeInDown } from "react-native-reanimated";
 import InnerLoading from "./InnerLoading";
 import { CachedImage } from "../performance/HelpLoading";
+import { useNavigation } from "@react-navigation/native";
 
 export default function Recipes({ categories, recipes }) {
+  const navigation = useNavigation();
   return (
     <View className="mx-4 space-y-3">
       <Text
@@ -28,7 +30,9 @@ export default function Recipes({ categories, recipes }) {
             keyExtractor={(item) => item.idMeal}
             numColumns={2}
             showsVerticalScrollIndicator={false}
-            renderItem={({ item, i }) => <RecipeCard item={item} index={i} />}
+            renderItem={({ item, i }) => (
+              <RecipeCard item={item} index={i} navigation={navigation} />
+            )}
             //refreshing={isLoadingNext}
             //onRefresh={() => refetch({ first: ITEM_CNT })}
             onEndReachedThreshold={0.1}
@@ -40,7 +44,7 @@ export default function Recipes({ categories, recipes }) {
   );
 }
 
-const RecipeCard = ({ item, index }) => {
+const RecipeCard = ({ item, index, navigation }) => {
   let isEven = index % 2 == 0;
   return (
     <Animated.View
@@ -56,6 +60,8 @@ const RecipeCard = ({ item, index }) => {
           paddingRight: isEven ? 8 : 0,
         }}
         className="flex justify-center mb-4 space-y-1"
+        // () => console.log("Pressed")
+        onPress={() => navigation.navigate("RecipeInfoScreen", { ...item })}
       >
         {
           <Image

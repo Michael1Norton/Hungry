@@ -21,7 +21,7 @@ export default function Categories({
       >
         {categories.map((category, index) => {
           let isActive = category.strCategory === activeCategory;
-          let activeButtonClass = isActive ? "bg-amber-400" : "bg-black/10";
+          let activeButtonClass = isActive ? "bg-third" : "bg-black/10";
           return (
             <TouchableOpacity
               key={index}
@@ -38,7 +38,7 @@ export default function Categories({
               {/* Category Name Text */}
               <Text
                 style={{ fontSize: hp(1.5), textAlign: "center" }}
-                className="text-neutral-600 font-semibold"
+                className="text-black font-semibold"
               >
                 {category.strCategory}
               </Text>

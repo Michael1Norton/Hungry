@@ -15,10 +15,7 @@ export default function Recipes({ categories, recipes }) {
   const navigation = useNavigation();
   return (
     <View className="mx-4 space-y-3">
-      <Text
-        style={{ fontSize: hp(3) }}
-        className="font-semibold text-neutral-600"
-      >
+      <Text style={{ fontSize: hp(3) }} className="font-semibold text-black">
         Recipes
       </Text>
       <View>
@@ -72,6 +69,8 @@ const RecipeCard = ({ item, index, navigation }) => {
               width: "100%",
               height: index % 3 == 0 ? hp(25) : hp(35),
               borderRadius: 35,
+              borderWidth: 2,
+              borderColor: "black",
             }}
             className="bg-black/5"
           ></Image>
@@ -87,7 +86,7 @@ const RecipeCard = ({ item, index, navigation }) => {
         />  */}
         <Text
           style={{ fontSize: hp(1.5) }}
-          className="font-semibold ml-2 text-neutral-600"
+          className="font-normal ml-2 text-black"
         >
           {item.strMeal.length > 20
             ? item.strMeal.substring(0, 20) + "..."

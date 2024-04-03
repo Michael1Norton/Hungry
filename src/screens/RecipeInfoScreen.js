@@ -69,7 +69,7 @@ const RecipeInfoScreen = (props) => {
 
   return (
     <ScrollView
-      className="bg-white flex-1"
+      className="bg-primary flex-1"
       showsVerticalScrollIndicator={false}
       contentContainerStyle={{ paddingBottom: 30 }}
     >
@@ -97,7 +97,7 @@ const RecipeInfoScreen = (props) => {
           <MaterialIcons
             name="chevron-left"
             size={hp(4)}
-            color="orange"
+            color="black"
             style={{ marginRight: 10, marginLeft: 10 }}
           />
         </TouchableOpacity>
@@ -122,15 +122,15 @@ const RecipeInfoScreen = (props) => {
           <View className="space-y-2">
             <Text
               style={{ fontSize: hp(3) }}
-              className="font-bold flex-1 text-neutral-700"
+              className="font-bold flex-1 text-black"
             >
               {meal?.strMeal}
             </Text>
             <Text
               style={{ fontSize: hp(2) }}
-              className="font-medium flex-1 text-amber-500"
+              className="font-medium flex-1 text-third"
             >
-              <Text className="text-neutral-500">Region: </Text>
+              <Text className="text-black">Region: </Text>
               {meal?.strArea}
             </Text>
           </View>
@@ -140,28 +140,31 @@ const RecipeInfoScreen = (props) => {
           <View className="space-y-4">
             <Text
               style={{ fontSize: hp(2) }}
-              className="font-bold flex-1 text-neutral-700"
+              className="font-bold flex-1 text-black"
             >
               Ingredients
             </Text>
+            <View
+              style={{ height: 2, backgroundColor: "black", width: "100%" }}
+            />
             <View className="space-y-2 ml-3">
               {ingredientsIndexes(meal).map((i) => {
                 return (
                   <View key={i} className="flex-row space-x-4">
                     <View
                       style={{ height: hp(1.5), width: hp(1.5) }}
-                      className="bg-amber-300 rounded-full"
+                      className="bg-secondary-100 rounded-full"
                     />
                     <View className="flex-row space-x-2">
                       <Text
                         style={{ fontSize: hp(1.8) }}
-                        className="font-bold text-neutral-700"
+                        className="font-bold text-third"
                       >
                         {meal["strMeasure" + i]}
                       </Text>
                       <Text
                         style={{ fontSize: hp(1.8) }}
-                        className="font-medium text-neutral-600"
+                        className="font-medium text-black"
                       >
                         {meal["strIngredient" + i]}
                       </Text>
@@ -175,11 +178,14 @@ const RecipeInfoScreen = (props) => {
           <View className="space-y-2">
             <Text
               style={{ fontSize: hp(2) }}
-              className="font-bold flex-1 text-neutral-700"
+              className="font-bold flex-1 text-black"
             >
               Instructions
             </Text>
-            <Text style={{ fontSize: hp(1.8) }} className="text-neutral-700">
+            <View
+              style={{ height: 2, backgroundColor: "black", width: "100%" }}
+            />
+            <Text style={{ fontSize: hp(1.8) }} className="text-black">
               {meal?.strInstructions}
             </Text>
           </View>
@@ -189,10 +195,13 @@ const RecipeInfoScreen = (props) => {
             <View className="space-y-4">
               <Text
                 style={{ fontSize: hp(2) }}
-                className="font-bold flex-1 text-neutral-700"
+                className="font-bold flex-1 text-black"
               >
                 Recipe Video
               </Text>
+              <View
+                style={{ height: 2, backgroundColor: "black", width: "100%" }}
+              />
               <View className="flex-row justify-center">
                 <YouTubeIFrame
                   height={hp(30)}

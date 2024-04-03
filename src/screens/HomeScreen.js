@@ -97,7 +97,7 @@ const HomeScreen = () => {
   };
 
   return (
-    <View className="flex-1 bg-white">
+    <View className="flex-1 bg-primary">
       <StatusBar style="dark" />
       <ScrollView
         showsVerticalScrollIndicator={false}
@@ -124,24 +124,25 @@ const HomeScreen = () => {
 
         {/* Welcome Back */}
         <View className="mx-4 space-y-2 mb-2">
-          <Text style={{ fontSize: hp(2) }} className="text-neutral-600">
-            Welcome back!
+          <Text style={{ fontSize: hp(2) }} className="text-back">
+            Feeling Hungry?
           </Text>
 
           {/* Make ur own food and the home color */}
           <View>
             <Text
-              style={{ fontSize: hp(4) }}
-              className="font-semibold text-neutral-600"
+              style={{ fontSize: hp(3.5) }}
+              className="font-normal text-black"
             >
-              Make your own food,
+              Food you love,
             </Text>
           </View>
           <Text
-            style={{ fontSize: hp(4) }}
-            className="font-semibold text-neutral-600"
+            style={{ fontSize: hp(3.5) }}
+            className="font-normal text-black"
           >
-            stay at <Text className="text-amber-400">home</Text>
+            from the comfort of{" "}
+            <Text className="text-third font-bold">home</Text>
           </Text>
         </View>
 
@@ -157,7 +158,7 @@ const HomeScreen = () => {
           {/* TextInput */}
           <TextInput
             placeholder="Search for recipes"
-            placeholderTextColor={"gray"}
+            placeholderTextColor={"black"}
             style={{ fontSize: hp(2), flex: 1 }}
             className="text-base mb-1 pl-3 tracking-wider"
             onChangeText={setSearchQuery}

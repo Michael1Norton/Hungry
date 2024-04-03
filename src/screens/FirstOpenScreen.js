@@ -36,7 +36,10 @@ const FirstOpenScreen = () => {
   }, []);
 
   return (
-    <View className="flex-1 justify-center items-center space-y-10 bg-amber-500 ">
+    <View
+      style={{ backgroundColor: "#994D1C" }}
+      className="flex-1 justify-center items-center space-y-10"
+    >
       <Image
         source={require("../images/background.png")}
         style={{ position: "absolute", width: wp(100), height: hp(100) }}
@@ -45,23 +48,23 @@ const FirstOpenScreen = () => {
       <StatusBar style="light" />
       {/*Inserting logo with 4 rings which will be minimalistic and animated*/}
       <Animated.View
-        className="bg-white/20 rounded-full"
+        className="bg-sixth/20 rounded-full"
         style={{ padding: ring4Padding }}
       >
         <Animated.View
-          className="bg-white/40 rounded-full"
+          className="bg-fifth/40 rounded-full"
           style={{ padding: ring3Padding }}
         >
           <Animated.View
-            className="bg-white/60 rounded-full"
+            className="bg-secondary-100/60 rounded-full"
             style={{ padding: ring2Padding }}
           >
             <Animated.View
-              className="bg-white/80 rounded-full"
+              className="bg-primary/80 rounded-full"
               style={{ padding: hp(0) }}
             >
               <Image
-                source={require("../images/1.png")}
+                source={require("../images/logo2.png")}
                 style={{ width: hp(40), height: hp(40) }}
               />
             </Animated.View>
@@ -75,8 +78,11 @@ const FirstOpenScreen = () => {
           navigation.navigate("LoginScreen");
         }}
       >
-        <View className="bg-amber-800 rounded-full p-4 items-center justify-center">
-          <Text className="font-bold text-white text-lg">Lets Eat! </Text>
+        <View
+          style={{ backgroundColor: "#F5CCA0" }}
+          className="rounded-full p-4 items-center justify-center"
+        >
+          <Text className="font-bold text-third text-lg">Lets Eat! </Text>
         </View>
       </TouchableOpacity>
     </View>

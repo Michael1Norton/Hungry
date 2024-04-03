@@ -63,9 +63,6 @@ const LoginScreen = ({ navigation }) => {
   return (
     <SafeAreaView style={{ flex: 1, justifyContent: "center" }}>
       <View style={{ paddingHorizontal: 25 }}>
-        <View style={{ alignItems: "center" }}>
-          <Image source={LoginBackground} style={{ width: 200, height: 200 }} />
-        </View>
         <Text
           style={{
             fontSize: 28,

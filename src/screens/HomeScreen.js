@@ -141,8 +141,8 @@ const HomeScreen = () => {
             style={{ fontSize: hp(3.5) }}
             className="font-normal text-black"
           >
-            from the comfort of{" "}
-            <Text className="text-third font-bold">home</Text>
+            in the palm of your{" "}
+            <Text className="text-third font-bold">hand</Text>
           </Text>
         </View>
 

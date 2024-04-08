@@ -21,7 +21,7 @@ const AppNav = () => {
 
   return (
     <NavigationContainer>
-      {token ? <AuthStack /> : <AppStack />}
+      {token ? <AppStack /> : <AuthStack />}
     </NavigationContainer>
   );
 };

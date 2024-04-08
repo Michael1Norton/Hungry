@@ -21,7 +21,6 @@ import {
 const RegisterScreen = ({ navigation }) => {
   const [userName, setUserName] = useState("");
   const [email, setEmail] = useState("");
-  const [phoneNumber, setPhoneNumber] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
 
@@ -29,10 +28,9 @@ const RegisterScreen = ({ navigation }) => {
     try {
       console.log("Registering...");
       console.log("Username:", userName || "N/A");
-      console.log("Email:", email || "N/A");
-      console.log("Phone Number:", phoneNumber);
       console.log("Password:", password);
       console.log("Confirm Password:", confirmPassword);
+      console.log("Email:", email || "N/A");
 
       // make sure passwords match
       if (password !== confirmPassword) {
@@ -42,16 +40,15 @@ const RegisterScreen = ({ navigation }) => {
       }
 
       // API Request to register
-      const response = await fetch("http://10.0.2.2:4000/api/users/signup", {
+      const response = await fetch("http://10.0.2.2:3000/api/users/signup", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
           username: userName,
-          email,
-          phoneNum: phoneNumber,
           password,
+          email,
         }),
       });
 
@@ -152,31 +149,6 @@ const RegisterScreen = ({ navigation }) => {
             keyboardType={"email-address"}
             value={email}
             onTextChange={setEmail}
-          />
-        </View>
-
-        <View
-          style={{
-            backgroundColor: "#FFF",
-            padding: hp(0.8),
-            borderRadius: 15,
-            marginBottom: hp(0.8),
-            width: wp(90),
-          }}
-        >
-          <InputField
-            label={"Phone Number"}
-            icon={
-              <MaterialIcons
-                name="smartphone"
-                size={24}
-                color="#120"
-                style={{ marginRight: 5 }}
-              />
-            }
-            keyboardType={"numeric"}
-            value={phoneNumber}
-            onTextChange={setPhoneNumber}
           />
         </View>
 

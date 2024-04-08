@@ -33,7 +33,7 @@ const LoginScreen = ({ navigation }) => {
 
       console.log(JSON.stringify({ userName, password }));
       // API Request to login
-      const response = await fetch("http://10.0.2.2:4000/api/users/login", {
+      const response = await fetch("http://10.0.2.2:3000/api/users/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -45,8 +45,9 @@ const LoginScreen = ({ navigation }) => {
 
       if (response.ok) {
         // Login successful
-        console.log(data);
-        const { token } = data;
+        console.log("What is the data:", data);
+        console.log("Token only:", data.token);
+        const token = data.token;
         login(token);
         //navigation.navigate("AppStack");
       } else {
@@ -56,6 +57,44 @@ const LoginScreen = ({ navigation }) => {
       }
     } catch (error) {
       console.error("Error trying to log in: ", error);
+      Alert.alert("Error", "An unexpected error occurred. Please try again.");
+    }
+  };
+
+  const handleForgotPassword = async () => {
+    try {
+      console.log("Forgot Password starting...");
+      console.log("Username:", userName || "N/A");
+
+      // API Request to reset password
+      const response = await fetch(
+        "http://10.0.2.2:3000/api/users/forgot-password",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ username: userName }),
+        }
+      );
+
+      const data = await response.json();
+
+      if (response.ok) {
+        // Reset password request successful
+        console.log(data);
+        Alert.alert(
+          "Email Sent",
+          "Check the email associated with your Culinary Canvas account for the password reset link.",
+          data.message
+        );
+      } else {
+        // Reset password request failed
+        console.log(data);
+        Alert.alert("Password reset failed", data.message);
+      }
+    } catch (error) {
+      console.error("Error trying to reset password: ", error);
       Alert.alert("Error", "An unexpected error occurred. Please try again.");
     }
   };
@@ -140,7 +179,7 @@ const LoginScreen = ({ navigation }) => {
             value={password}
             onTextChange={setPassword}
             fieldButton={"Forgot?"}
-            fieldButtonAction={() => {}}
+            fieldButtonAction={handleForgotPassword}
           />
         </View>
 

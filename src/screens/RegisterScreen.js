@@ -78,6 +78,10 @@ const RegisterScreen = ({ navigation }) => {
         backgroundColor: "#FEECE2",
       }}
     >
+      <Image
+        source={require("../images/background.png")}
+        style={{ position: "absolute", width: wp(100), height: hp(100) }}
+      />
       <View style={{ paddingTop: 0, paddingBottom: hp(2) }}>
         <Image source={appIcon} style={{ width: hp(22), height: hp(22) }} />
       </View>

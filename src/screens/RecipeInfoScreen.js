@@ -82,7 +82,7 @@ const RecipeInfoScreen = (props) => {
             width: wp(98),
             height: hp(50),
             borderRadius: 35,
-            marginTop: hp(3),
+            marginTop: hp(5),
           }}
           className="bg-black/5"
         />

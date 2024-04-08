@@ -98,10 +98,14 @@ const HomeScreen = () => {
 
   return (
     <View className="flex-1 bg-primary">
+      <Image
+        source={require("../images/background.png")}
+        style={{ position: "absolute", width: wp(100), height: hp(100) }}
+      />
       <StatusBar style="dark" />
       <ScrollView
         showsVerticalScrollIndicator={false}
-        contentContainerStyle={{ paddingBottom: 50, paddingTop: hp(3) }}
+        contentContainerStyle={{ paddingBottom: 50, paddingTop: hp(5) }}
         className="space-y-2 pt-15"
       >
         {/* Inserting the user icon */}

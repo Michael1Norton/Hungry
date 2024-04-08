@@ -53,7 +53,7 @@ const LoginScreen = ({ navigation }) => {
       } else {
         // Login failed
         console.log(data);
-        Alert.alert("Login failed");
+        Alert.alert("Login failed", "Invalid username or password.");
       }
     } catch (error) {
       console.error("Error trying to log in: ", error);
@@ -108,6 +108,10 @@ const LoginScreen = ({ navigation }) => {
         backgroundColor: "#FEECE2",
       }}
     >
+      <Image
+        source={require("../images/background.png")}
+        style={{ position: "absolute", width: wp(100), height: hp(100) }}
+      />
       <View style={{ paddingTop: 0, paddingBottom: hp(5) }}>
         <Image source={appIcon} style={{ width: hp(22), height: hp(22) }} />
       </View>

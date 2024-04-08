@@ -29,6 +29,10 @@ const UserProfileScreen = () => {
 
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: "#F5CCA0" }}>
+      <Image
+        source={require("../images/background.png")}
+        style={{ position: "absolute", width: wp(100), height: hp(100) }}
+      />
       <View
         style={{
           flexDirection: "row",

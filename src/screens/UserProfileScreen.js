@@ -35,7 +35,7 @@ const UserProfileScreen = () => {
           justifyContent: "space-between",
           alignItems: "center",
           paddingHorizontal: hp(2),
-          paddingTop: hp(4),
+          paddingTop: hp(5),
         }}
       >
         <TouchableOpacity
@@ -56,7 +56,29 @@ const UserProfileScreen = () => {
           source={require("../images/profilePic.png")}
           style={{ height: hp(22), width: hp(22), borderRadius: hp(5) }}
         />
-        <Button title="Sign Out" onPress={handleLogout} />
+        <TouchableOpacity
+          style={{
+            backgroundColor: "#FF9F45",
+            padding: 10,
+            borderRadius: 5,
+            alignItems: "center",
+          }}
+          onPress={handleLogout}
+        >
+          <Text>Sign Out</Text>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={{
+            backgroundColor: "#FF9F45",
+            padding: 10,
+            borderRadius: 5,
+            alignItems: "center",
+            marginTop: hp(2),
+          }}
+          onPress={() => navigation.navigate("ResetPasswordScreen")}
+        >
+          <Text>Reset Password</Text>
+        </TouchableOpacity>
       </View>
 
       <View style={{ justifyContent: "center", alignItems: "center" }}>

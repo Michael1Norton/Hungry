@@ -94,8 +94,8 @@ const LoginScreen = ({ navigation }) => {
         Alert.alert("Password reset failed", data.message);
       }
     } catch (error) {
-      console.error("Error trying to reset password: ", error);
-      Alert.alert("Error", "An unexpected error occurred. Please try again.");
+      //console.error("Error trying to reset password: ", error);
+      //Alert.alert("Error", "An unexpected error occurred. Please try again.");
     }
   };
 

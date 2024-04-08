@@ -1,11 +1,5 @@
 import React from "react";
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  TextInput,
-  onChangeText,
-} from "react-native";
+import { View, Text, TouchableOpacity, TextInput } from "react-native";
 import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
@@ -40,11 +34,13 @@ export default function InputField({
         onChangeText={onTextChange}
       />
 
-      <TouchableOpacity onPress={fieldButtonAction}>
-        <Text style={{ color: "#6B240C", fontWeight: "bold" }}>
-          {fieldButton}
-        </Text>
-      </TouchableOpacity>
+      {fieldButton && (
+        <TouchableOpacity onPress={fieldButtonAction}>
+          <Text style={{ color: "#6B240C", fontWeight: "bold" }}>
+            {fieldButton}
+          </Text>
+        </TouchableOpacity>
+      )}
     </View>
   );
 }

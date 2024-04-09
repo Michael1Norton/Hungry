@@ -16,24 +16,24 @@ const FirstOpenScreen = () => {
   const ring3Padding = useSharedValue(0);
   const ring4Padding = useSharedValue(0);
 
-  useEffect(() => {
-    ring2Padding.value = 0;
-    ring3Padding.value = 0;
-    ring4Padding.value = 0;
+  // useEffect(() => {
+  //   ring2Padding.value = 0;
+  //   ring3Padding.value = 0;
+  //   ring4Padding.value = 0;
 
-    setTimeout(
-      () => (ring2Padding.value = withSpring(ring2Padding.value + hp(5))),
-      200
-    );
-    setTimeout(
-      () => (ring3Padding.value = withSpring(ring3Padding.value + hp(5))),
-      300
-    );
-    setTimeout(
-      () => (ring4Padding.value = withSpring(ring4Padding.value + hp(6))),
-      400
-    );
-  }, []);
+  //   setTimeout(
+  //     () => (ring2Padding.value = withSpring(ring2Padding.value + hp(5))),
+  //     200
+  //   );
+  //   setTimeout(
+  //     () => (ring3Padding.value = withSpring(ring3Padding.value + hp(5))),
+  //     300
+  //   );
+  //   setTimeout(
+  //     () => (ring4Padding.value = withSpring(ring4Padding.value + hp(6))),
+  //     400
+  //   );
+  // }, []);
 
   return (
     <View

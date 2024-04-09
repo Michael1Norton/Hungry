@@ -74,7 +74,7 @@ const FirstOpenScreen = () => {
 
       <TouchableOpacity
         onPress={() => {
-          console.log("Button pressed");
+          //console.log("Button pressed");
           navigation.navigate("LoginScreen");
         }}
       >

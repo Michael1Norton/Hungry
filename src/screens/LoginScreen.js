@@ -33,7 +33,7 @@ const LoginScreen = ({ navigation }) => {
 
       console.log(JSON.stringify({ userName, password }));
       // API Request to login
-      const response = await fetch("http://10.0.2.2:3000/api/users/login", {
+      const response = await fetch("http://10.0.2.2:4000/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -53,7 +53,8 @@ const LoginScreen = ({ navigation }) => {
       } else {
         // Login failed
         console.log(data);
-        Alert.alert("Login failed", "Invalid username or password.");
+        let errorMessage = data.message || "Invalid username or password.";
+        Alert.alert("Login failed", errorMessage);
       }
     } catch (error) {
       console.error("Error trying to log in: ", error);
@@ -63,20 +64,23 @@ const LoginScreen = ({ navigation }) => {
 
   const handleForgotPassword = async () => {
     try {
+      if (!userName) {
+        // If username is not provided, show an alert
+        Alert.alert("Missing Username", "Please enter your username.");
+        return;
+      }
+
       console.log("Forgot Password starting...");
       console.log("Username:", userName || "N/A");
 
       // API Request to reset password
-      const response = await fetch(
-        "http://10.0.2.2:3000/api/users/forgot-password",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ username: userName }),
-        }
-      );
+      const response = await fetch("http://10.0.2.2:4000/forgot-password", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ username: userName }),
+      });
 
       const data = await response.json();
 
@@ -85,13 +89,15 @@ const LoginScreen = ({ navigation }) => {
         console.log(data);
         Alert.alert(
           "Email Sent",
-          "Check the email associated with your Culinary Canvas account for the password reset link.",
+          "Check the email associated with your Culinary Canvas account for the password reset code.",
           data.message
         );
+        navigation.navigate("ForgotPasswordScreen");
       } else {
         // Reset password request failed
         console.log(data);
-        Alert.alert("Password reset failed", data.message);
+        let errorMessage = data.message || "Password reset failed.";
+        Alert.alert("Password reset failed", errorMessage);
       }
     } catch (error) {
       //console.error("Error trying to reset password: ", error);
@@ -207,6 +213,13 @@ const LoginScreen = ({ navigation }) => {
             </Text>
           </TouchableOpacity>
         </View>
+        <Text>Need to verify your account? </Text>
+        <TouchableOpacity
+          onPress={() => navigation.navigate("EmailVerificationCodeScreen")}
+          style={{ borderBottomWidth: 1, borderBottomColor: "#6B240C" }}
+        >
+          <Text style={{ color: "#6B240C", fontWeight: "bold" }}>Verify</Text>
+        </TouchableOpacity>
       </View>
     </SafeAreaView>
   );

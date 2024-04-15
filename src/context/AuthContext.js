@@ -5,32 +5,35 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 export const AuthContext = createContext();
 
 export const AuthProvider = ({ children }) => {
-  const [token, setToken] = useState(null);
+  const [userData, setUserData] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
 
-  const login = (token) => {
+  const login = async ({ token, username }) => {
     setIsLoading(true);
-    setToken(token);
-    AsyncStorage.setItem("token", token);
+    const userData = { token, username };
+    setUserData(userData);
+    await AsyncStorage.setItem("userData", JSON.stringify(userData));
     setIsLoading(false);
   };
 
-  const logout = () => {
+  const logout = async () => {
     setIsLoading(true);
-    setToken(null);
-    AsyncStorage.removeItem("token");
+    setUserData(null);
+    await AsyncStorage.removeItem("userData");
     setIsLoading(false);
   };
 
   const isLoggedIn = async () => {
     try {
       setIsLoading(true);
-      let userToken = await AsyncStorage.getItem("token");
-      setToken(userToken);
+      let storedUserData = await AsyncStorage.getItem("userData");
+      if (storedUserData) {
+        setUserData(JSON.parse(storedUserData));
+      }
       setIsLoading(false);
     } catch (error) {
       console.error(
-        "Error trying to get token from AsyncStorage for isLoggedIn: ",
+        "Error trying to get user data from AsyncStorage for isLoggedIn: ",
         error
       );
     }
@@ -41,7 +44,7 @@ export const AuthProvider = ({ children }) => {
   }, []);
 
   return (
-    <AuthContext.Provider value={{ token, login, logout, isLoading }}>
+    <AuthContext.Provider value={{ userData, login, logout, isLoading }}>
       {children}
     </AuthContext.Provider>
   );

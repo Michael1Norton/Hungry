@@ -40,7 +40,7 @@ const RegisterScreen = ({ navigation }) => {
       }
 
       // API Request to register
-      const response = await fetch("http://10.0.2.2:3000/api/users/signup", {
+      const response = await fetch("http://10.0.2.2:4000/signup", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -57,11 +57,12 @@ const RegisterScreen = ({ navigation }) => {
       if (response.ok) {
         // Registration successful
         console.log(data);
-        navigation.navigate("LoginScreen");
+        navigation.navigate("EmailVerificationCodeScreen");
       } else {
         // Registration failed
         console.log(data);
-        Alert.alert("Registration failed", data.message);
+        let errorMessage = data.message || "Registration failed.";
+        Alert.alert("Registration failed", errorMessage);
       }
     } catch (error) {
       console.error("Error trying to register: ", error);
@@ -205,6 +206,19 @@ const RegisterScreen = ({ navigation }) => {
             onTextChange={setConfirmPassword}
           />
         </View>
+
+        <Text
+          style={{
+            fontSize: hp(1.75),
+            fontWeight: "bold",
+            color: "grey",
+            marginBottom: hp(2),
+            width: wp(90),
+          }}
+        >
+          Password must be at least 7 characters long and include a special
+          character.
+        </Text>
 
         <CustomButton title={"Register"} onPress={handleRegister} />
 

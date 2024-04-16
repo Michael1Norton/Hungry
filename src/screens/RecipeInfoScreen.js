@@ -128,7 +128,7 @@ const RecipeInfoScreen = (props) => {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ username, idMeal: mealId }),
+          body: JSON.stringify({ username, recipeId: mealId }),
         }
       );
       if (response.ok) {

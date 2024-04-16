@@ -14,10 +14,45 @@ import {
   widthPercentageToDP as wp,
   heightPercentageToDP as hp,
 } from "react-native-responsive-screen";
+import { useEffect, useState, useContext } from "react";
+import UserRecipeDisplay from "../components/UserRecipeDisplay";
+import { ActivityIndicator } from "react-native";
+import GetUsername from "../components/GetUsername";
 
 const UserProfileScreen = () => {
   const { logout } = React.useContext(AuthContext);
-  const navigation = useNavigation(); // Initialize useNavigation hook
+  const navigation = useNavigation();
+  const [favoriteRecipes, setFavoriteRecipes] = useState([]);
+  //const [username, setUsername] = useState("");
+
+  const { userData } = useContext(AuthContext);
+  const username = GetUsername();
+
+  useEffect(() => {
+    if (userData) {
+      fetchFavoriteRecipes();
+    } else {
+      console.log("User Data not found");
+    }
+  }, [userData]);
+
+  const fetchFavoriteRecipes = async () => {
+    try {
+      const response = await fetch(
+        `http://culinary-canvas-express.com:40/favorite-recipe/${userData.username}`
+      );
+      if (response.ok) {
+        const data = await response.json();
+        const recipeIds = data.map((recipe) => recipe.recipeId);
+        setFavoriteRecipes(recipeIds);
+        console.log("Favorite recipeIds:", recipeIds); // Log favorite recipeIds here
+      } else {
+        console.error("Failed to fetch favorite recipes");
+      }
+    } catch (error) {
+      console.error("Error fetching favorite recipes:", error);
+    }
+  };
 
   const handleLogout = () => {
     logout();
@@ -71,18 +106,6 @@ const UserProfileScreen = () => {
         >
           <Text>Sign Out</Text>
         </TouchableOpacity>
-        <TouchableOpacity
-          style={{
-            backgroundColor: "#FF9F45",
-            padding: 10,
-            borderRadius: 5,
-            alignItems: "center",
-            marginTop: hp(2),
-          }}
-          onPress={() => navigation.navigate("ResetPasswordScreen")}
-        >
-          <Text>Reset Password</Text>
-        </TouchableOpacity>
       </View>
 
       <View style={{ justifyContent: "center", alignItems: "center" }}>
@@ -95,6 +118,13 @@ const UserProfileScreen = () => {
             marginTop: hp(0.5),
             marginBottom: hp(1.5),
           }}
+        />
+      </View>
+
+      <View style={{ flex: 1, flexDirection: "row" }}>
+        <UserRecipeDisplay
+          favoriteMealIds={favoriteRecipes}
+          navigation={navigation}
         />
       </View>
     </SafeAreaView>

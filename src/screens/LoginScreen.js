@@ -33,13 +33,16 @@ const LoginScreen = ({ navigation }) => {
 
       console.log(JSON.stringify({ userName, password }));
       // API Request to login
-      const response = await fetch("http://10.0.2.2:4000/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ username: userName, password }),
-      });
+      const response = await fetch(
+        "http://culinary-canvas-express.com:40/login",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ username: userName, password }),
+        }
+      );
 
       const data = await response.json();
 
@@ -47,8 +50,11 @@ const LoginScreen = ({ navigation }) => {
         // Login successful
         console.log("What is the data:", data);
         console.log("Token only:", data.token);
-        const token = data.token;
-        login(token);
+        const {
+          token,
+          user: { username },
+        } = data; // Extract token and username from data
+        login({ token, username }); // Pass token and username separately to login function
         //navigation.navigate("AppStack");
       } else {
         // Login failed
@@ -74,13 +80,16 @@ const LoginScreen = ({ navigation }) => {
       console.log("Username:", userName || "N/A");
 
       // API Request to reset password
-      const response = await fetch("http://10.0.2.2:4000/forgot-password", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ username: userName }),
-      });
+      const response = await fetch(
+        "http://culinary-canvas-express.com:40/forgot-password",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ username: userName }),
+        }
+      );
 
       const data = await response.json();
 

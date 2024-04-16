@@ -7,7 +7,7 @@ import {
   TouchableOpacity,
   Text,
 } from "react-native";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import MaterialIcons from "react-native-vector-icons/MaterialIcons";
 import {
   widthPercentageToDP as wp,
@@ -16,6 +16,9 @@ import {
 import { useNavigation } from "@react-navigation/native";
 import InnerLoading from "../components/InnerLoading";
 import YouTubeIFrame from "react-native-youtube-iframe";
+import { AuthContext } from "../context/AuthContext";
+import { Alert } from "react-native";
+import GetUsername from "../components/GetUsername";
 
 const RecipeInfoScreen = (props) => {
   //console.log(props.route.params);
@@ -24,11 +27,22 @@ const RecipeInfoScreen = (props) => {
   const [meal, setMeal] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const [playing, setPlaying] = useState(false);
+  //const [username, setUsername] = useState("");
+  const [mealId, setMealId] = useState(null);
   const navigation = useNavigation();
 
+  const { userData } = useContext(AuthContext);
+
+  const username = GetUsername();
+
   useEffect(() => {
+    const mealId = itemInfo.idMeal;
+    setMealId(mealId);
+    console.log("Meal:", mealId);
     getRecipeData(itemInfo.idMeal);
-  }, []);
+    console.log("User Data check:", userData);
+    checkIsFavorite(username, mealId);
+  }, [itemInfo.idMeal]);
 
   {
     /* Get recipes info from the mealdb api */
@@ -46,6 +60,86 @@ const RecipeInfoScreen = (props) => {
       }
     } catch (error) {
       console.error("Error getting categories: ", error);
+    }
+  };
+
+  const checkIsFavorite = async (username, mealId) => {
+    console.log(
+      "Checking if favorite for username:",
+      username,
+      "and mealId:",
+      mealId
+    );
+    try {
+      const response = await fetch(
+        "http://culinary-canvas-express.com:40/is-favorite",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ username, recipeId: mealId }),
+        }
+      );
+      const data = await response.json();
+      if (response.ok) {
+        setIsFav(data.isFavorite);
+        console.log("Is favorite:", data.isFavorite); // Log the value of isFavorit
+      }
+    } catch (error) {
+      console.error("Error checking if recipe is favorite: ", error);
+    }
+  };
+
+  const handleFav = async (username, mealId) => {
+    try {
+      console.log("Username in function:", username);
+      console.log("Meal ID in function:", mealId);
+      const response = await fetch(
+        "http://culinary-canvas-express.com:40/favorite-recipe/",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ username, recipeId: mealId }),
+        }
+      );
+      const data = await response.json();
+      console.log(data);
+      if (response.ok) {
+        setIsFav(true);
+        //Alert.alert("Success", "Meal added to favorites!");
+      } else {
+        Alert.alert("Error", "Failed to add meal to favorites.");
+      }
+    } catch (error) {
+      console.error("Error adding meal to favorites: ", error);
+      Alert.alert("Error", "An unexpected error occurred. Please try again.");
+    }
+  };
+
+  const handleUnfav = async (username, mealId) => {
+    try {
+      const response = await fetch(
+        "http://culinary-canvas-express.com:40/unfavorite",
+        {
+          method: "DELETE",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ username, idMeal: mealId }),
+        }
+      );
+      if (response.ok) {
+        setIsFav(false);
+        //Alert.alert("Success", "Meal removed from favorites!");
+      } else {
+        Alert.alert("Error", "Failed to remove meal from favorites.");
+      }
+    } catch (error) {
+      console.error("Error removing meal from favorites: ", error);
+      Alert.alert("Error", "An unexpected error occurred. Please try again.");
     }
   };
 
@@ -102,13 +196,15 @@ const RecipeInfoScreen = (props) => {
           />
         </TouchableOpacity>
         <TouchableOpacity
-          onPress={() => setIsFav(!isFav)}
+          onPress={() =>
+            isFav ? handleUnfav(username, mealId) : handleFav(username, mealId)
+          }
           className="p-0 rounded-full mr-5 bg-white"
         >
           <MaterialIcons
             name="favorite"
             size={hp(4)}
-            color={isFav ? "red" : "gray"}
+            color={isFav ? "red" : "grey"}
             style={{ marginRight: 10, marginLeft: 10 }}
           />
         </TouchableOpacity>

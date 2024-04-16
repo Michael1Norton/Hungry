@@ -18,13 +18,16 @@ const EmailVerificationScreen = ({ navigation }) => {
       console.log("Confirmation Number:", confirmationNumber);
 
       // API Request to verify email
-      const response = await fetch("http://10.0.2.2:4000/confirmation-number", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ username, numberEntered: confirmationNumber }),
-      });
+      const response = await fetch(
+        "http://culinary-canvas-express.com:40/confirmation-number",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ username, numberEntered: confirmationNumber }),
+        }
+      );
 
       const data = await response.json();
 

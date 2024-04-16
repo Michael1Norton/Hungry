@@ -8,7 +8,6 @@ import {
 import MasonryList from "@react-native-seoul/masonry-list";
 import Animated, { FadeInDown } from "react-native-reanimated";
 import InnerLoading from "./InnerLoading";
-import { CachedImage } from "../performance/HelpLoading";
 import { useNavigation } from "@react-navigation/native";
 
 export default function Recipes({ categories, recipes }) {

@@ -40,17 +40,20 @@ const RegisterScreen = ({ navigation }) => {
       }
 
       // API Request to register
-      const response = await fetch("http://10.0.2.2:4000/signup", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          username: userName,
-          password,
-          email,
-        }),
-      });
+      const response = await fetch(
+        "http://culinary-canvas-express.com:40/signup",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            username: userName,
+            password,
+            email,
+          }),
+        }
+      );
 
       const data = await response.json();
 

@@ -41,7 +41,7 @@ const RegisterScreen = ({ navigation }) => {
 
       // API Request to register
       const response = await fetch(
-        "http://culinary-canvas-express.com:40/signup",
+        "http://culinary-canvas-express.com:80/signup",
         {
           method: "POST",
           headers: {

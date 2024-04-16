@@ -34,7 +34,7 @@ const LoginScreen = ({ navigation }) => {
       console.log(JSON.stringify({ userName, password }));
       // API Request to login
       const response = await fetch(
-        "http://culinary-canvas-express.com:40/login",
+        "http://culinary-canvas-express.com:80/login",
         {
           method: "POST",
           headers: {
@@ -81,7 +81,7 @@ const LoginScreen = ({ navigation }) => {
 
       // API Request to reset password
       const response = await fetch(
-        "http://culinary-canvas-express.com:40/forgot-password",
+        "http://culinary-canvas-express.com:80/forgot-password",
         {
           method: "POST",
           headers: {

@@ -72,7 +72,7 @@ const RecipeInfoScreen = (props) => {
     );
     try {
       const response = await fetch(
-        "http://culinary-canvas-express.com:40/is-favorite",
+        "http://culinary-canvas-express.com:80/is-favorite",
         {
           method: "POST",
           headers: {
@@ -96,7 +96,7 @@ const RecipeInfoScreen = (props) => {
       console.log("Username in function:", username);
       console.log("Meal ID in function:", mealId);
       const response = await fetch(
-        "http://culinary-canvas-express.com:40/favorite-recipe/",
+        "http://culinary-canvas-express.com:80/favorite-recipe/",
         {
           method: "POST",
           headers: {
@@ -122,7 +122,7 @@ const RecipeInfoScreen = (props) => {
   const handleUnfav = async (username, mealId) => {
     try {
       const response = await fetch(
-        "http://culinary-canvas-express.com:40/unfavorite",
+        "http://culinary-canvas-express.com:80/unfavorite",
         {
           method: "DELETE",
           headers: {

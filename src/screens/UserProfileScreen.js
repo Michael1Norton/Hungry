@@ -39,7 +39,7 @@ const UserProfileScreen = () => {
   const fetchFavoriteRecipes = async () => {
     try {
       const response = await fetch(
-        `http://culinary-canvas-express.com:40/favorite-recipe/${userData.username}`
+        `http://culinary-canvas-express.com:80/favorite-recipe/${userData.username}`
       );
       if (response.ok) {
         const data = await response.json();

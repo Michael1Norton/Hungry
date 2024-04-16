@@ -21,7 +21,7 @@ const ForgotPasswordScreen = ({ navigation }) => {
 
       // API Request to confirmation code
       const response = await fetch(
-        "http://culinary-canvas-express.com:40/Email-Confirmation-number",
+        "http://culinary-canvas-express.com:80/Email-Confirmation-number",
         {
           method: "POST",
           headers: {
@@ -39,7 +39,7 @@ const ForgotPasswordScreen = ({ navigation }) => {
 
         // Now, reset the password
         const resetResponse = await fetch(
-          "http://culinary-canvas-express.com:40/reset-password",
+          "http://culinary-canvas-express.com:80/reset-password",
           {
             method: "POST",
             headers: {

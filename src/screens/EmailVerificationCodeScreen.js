@@ -19,7 +19,7 @@ const EmailVerificationScreen = ({ navigation }) => {
 
       // API Request to verify email
       const response = await fetch(
-        "http://culinary-canvas-express.com:40/confirmation-number",
+        "http://culinary-canvas-express.com:80/confirmation-number",
         {
           method: "POST",
           headers: {
